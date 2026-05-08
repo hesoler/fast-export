@@ -123,7 +123,7 @@ def save_cache(filename,cache):
 def get_git_sha1(name,type='heads'):
   try:
     # use git-rev-parse to support packed refs
-    ref="refs/%s/%s" % (type,name.decode('utf8'))
+    ref="refs/%s/%s" % (type,name.decode('utf8', errors='replace'))
     l=subprocess.check_output(["git", "rev-parse", "--verify",
                                "--quiet", ref.encode('utf8')])
     if l == None or len(l) == 0:
