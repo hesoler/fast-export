@@ -4,12 +4,15 @@
 # Copyright (c) 2025 Siemens
 # License: MIT <http://www.opensource.org/licenses/mit-license.php>
 
+import os
+import sys
+# Add current directory to path to find hg2git and other modules
+sys.path.append(os.path.dirname(os.path.realpath(__file__)))
+
 from hg2git import setup_repo,fixup_user,get_branch,get_changeset
 from hg2git import load_cache,save_cache,get_git_sha1,set_default_branch,set_origin_name
 from optparse import OptionParser
 import re
-import sys
-import os
 from binascii import hexlify
 import pluginloader
 from hgext.largefiles import lfutil
