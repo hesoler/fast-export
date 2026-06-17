@@ -4,9 +4,13 @@
 # License: GPLv2
 
 from mercurial import node
+import os
+import sys
+# Add current directory to path to find hg2git and other modules
+sys.path.append(os.path.dirname(os.path.realpath(__file__)))
+
 from hg2git import setup_repo,load_cache,get_changeset,get_git_sha1
 from optparse import OptionParser
-import sys
 from binascii import hexlify
 
 def heads(ui,repo,start=None,stop=None,max=None):
