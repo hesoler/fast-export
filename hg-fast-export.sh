@@ -186,6 +186,12 @@ fi
 # cleanup on exit
 trap 'rm -f "$GIT_DIR/$PFX-$SFX_MARKS.old" "$GIT_DIR/$PFX-$SFX_MARKS.tmp"' 0
 
+# Detect unnamed heads automatically
+AUTO_PLUGINS=""
+if [ ! -z "$REPO" ]; then
+    AUTO_PLUGINS=$("$PYTHON" "$ROOT/detect_heads.py" "$REPO")
+fi
+
 _err1=
 _err2=
 exec 3>&1
@@ -200,7 +206,7 @@ $(
       --mapping "$GIT_DIR/$PFX-$SFX_MAPPING" \
       --heads "$GIT_DIR/$PFX-$SFX_HEADS" \
       --status "$GIT_DIR/$PFX-$SFX_STATE" \
-      "$@" 3>&- || _e1=$?
+      $AUTO_PLUGINS "$@" 3>&- || _e1=$?
     echo $_e1 >&3
   } | \
   {
