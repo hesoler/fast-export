@@ -89,4 +89,5 @@ for branch_name in branch_map:
                 new_branch = f"{clean_branch}-unnamed-head-{root_rev}"
 
                 # Print the plugin argument
-                print(f"--plugin head2branch={new_branch},{root_hex}")
+                plugin_str = f"--plugin head2branch={new_branch},{root_hex}\n"
+                sys.stdout.buffer.write(plugin_str.encode('utf-8'))
